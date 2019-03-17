@@ -1,0 +1,27 @@
+{
+  "name": "bobriltest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "bb"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bobril": "^9.5.0",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.3333"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": false,
+    "printWidth": 120
+  }
+}
