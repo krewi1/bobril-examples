@@ -1,7 +1,7 @@
 import * as b from "bobril";
 import { Button } from "./counterCreateComponent";
 
-class CounterClazz extends b.Component<never> {
+class CounterClazz extends b.Component<{}> {
     count: number = 0;
     timeoutId: number;
     postInitDom(): void {
