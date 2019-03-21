@@ -1,13 +1,20 @@
 import * as b from "bobril";
+import {WrapperStyles} from "./hoc/styles";
+import {normalizeCoords} from "./common/normalizeCoords";
 
 export interface Position {
     x: number;
     y: number;
 }
 
+export interface OffsetInfo extends Position {
+    maxX: number;
+    maxY: number;
+}
+
 class NaiveCursorDetect extends b.Component<{}> {
     position: Position;
-    offset: Position;
+    offset: OffsetInfo;
 
     constructor() {
         super();
@@ -17,7 +24,9 @@ class NaiveCursorDetect extends b.Component<{}> {
         };
         this.offset = {
             x: 0,
-            y: 0
+            y: 0,
+            maxX: 0,
+            maxY: 0
         };
     }
 
@@ -26,28 +35,37 @@ class NaiveCursorDetect extends b.Component<{}> {
         const bounding = element.getBoundingClientRect();
         this.offset = {
             x: bounding.left,
-            y: bounding.top
-        }
+            y: bounding.top,
+            maxX: bounding.width,
+            maxY: bounding.height,
+        };
+        this.recalculatePosition(this.position.x, this.position.y);
+        b.invalidate(this);
     }
 
     onMouseMove(event: b.IBobrilMouseEvent): b.GenericEventResult {
         const {x, y} = event;
+
+        this.recalculatePosition(x, y);
+        return b.EventResult.HandledPreventDefault;
+    }
+
+    private recalculatePosition(x: number, y: number) {
+        const {maxY, maxX, x: offsetX, y: offsetY} = this.offset;
+
         this.position = {
-            x,
-            y
+            x: normalizeCoords(maxX, x - offsetX),
+            y : normalizeCoords(maxY, y - offsetY)
         };
         b.invalidate(this);
-        return b.EventResult.HandledPreventDefault;
     }
 
     render(data: {}): b.IBobrilChildren {
         const {x, y} = this.position;
-        const xWithoutOffset = x - this.offset.x;
-        const yWithoutOffset = y - this.offset.y;
         return (
-            <div style={{width: "500px", height: "500px"}}>
-                {xWithoutOffset}
-                {yWithoutOffset}
+            <div style={WrapperStyles}>
+                <div>x: {x}</div>
+                <div>y: {y}</div>
             </div>
         )
     }

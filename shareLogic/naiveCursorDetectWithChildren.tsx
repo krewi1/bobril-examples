@@ -1,5 +1,8 @@
 import * as b from "bobril";
 import { ComponentOnPosition } from "./componentOnPosition";
+import {WrapperStyles} from "./hoc/styles";
+import {normalizeCoords} from "./common/normalizeCoords";
+import {OffsetInfo} from "./naiveCursorDetect";
 
 export interface Position {
     x: number;
@@ -8,7 +11,7 @@ export interface Position {
 
 class NaiveCursorDetectWithChildren extends b.Component<{}> {
     position: Position;
-    offset: Position;
+    offset: OffsetInfo;
 
     constructor() {
         super();
@@ -18,44 +21,48 @@ class NaiveCursorDetectWithChildren extends b.Component<{}> {
         };
         this.offset = {
             x: 0,
-            y: 0
+            y: 0,
+            maxX: 0,
+            maxY: 0
         };
     }
 
     postInitDom(me: b.IBobrilCacheNode): void {
         const element = b.getDomNode(me) as HTMLElement;
         const bounding = element.getBoundingClientRect();
-        this.position = {
-            x: bounding.left,
-            y: bounding.top
-        };
         this.offset = {
             x: bounding.left,
-            y: bounding.top
-        }
+            y: bounding.top,
+            maxX: bounding.width,
+            maxY: bounding.height,
+        };
+        this.recalculatePosition(this.position.x, this.position.y);
     }
 
     onMouseMove(event: b.IBobrilMouseEvent): b.GenericEventResult {
         const {x, y} = event;
-        debugger;
+        this.recalculatePosition(x, y);
+        return b.EventResult.HandledPreventDefault;
+    }
+
+    private recalculatePosition(x: number, y: number) {
+        const {maxY, maxX, x: offsetX, y: offsetY} = this.offset;
+
         this.position = {
-            x,
-            y
+            x: normalizeCoords(maxX, x - offsetX),
+            y : normalizeCoords(maxY, y - offsetY)
         };
         b.invalidate(this);
-        return b.EventResult.HandledPreventDefault;
     }
 
     render(data: {}): b.IBobrilChildren {
         const {x, y} = this.position;
-        const xWithoutOffset = x - this.offset.x;
-        const yWithoutOffset = y - this.offset.y;
         return (
-            <div style={{width: "500px", height: "500px", position: "relative"}}>
-                <ComponentOnPosition x={xWithoutOffset} y={yWithoutOffset} >
+            <div style={WrapperStyles}>
+                <ComponentOnPosition x={x} y={y} >
                     Victim
                 </ComponentOnPosition>
-                <ComponentOnPosition x={xWithoutOffset - 10} y={yWithoutOffset - 10} >
+                <ComponentOnPosition x={x - 10} y={y - 10} >
                     Stalker
                 </ComponentOnPosition>
             </div>
