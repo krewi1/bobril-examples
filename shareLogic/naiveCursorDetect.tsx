@@ -7,12 +7,26 @@ export interface Position {
 
 class NaiveCursorDetect extends b.Component<{}> {
     position: Position;
+    offset: Position;
 
     constructor() {
         super();
         this.position = {
             x: 0,
             y: 0
+        };
+        this.offset = {
+            x: 0,
+            y: 0
+        };
+    }
+
+    postInitDom(me: b.IBobrilCacheNode): void {
+        const element = b.getDomNode(me) as HTMLElement;
+        const bounding = element.getBoundingClientRect();
+        this.offset = {
+            x: bounding.left,
+            y: bounding.top
         }
     }
 
@@ -27,10 +41,13 @@ class NaiveCursorDetect extends b.Component<{}> {
     }
 
     render(data: {}): b.IBobrilChildren {
+        const {x, y} = this.position;
+        const xWithoutOffset = x - this.offset.x;
+        const yWithoutOffset = y - this.offset.y;
         return (
             <div style={{width: "500px", height: "500px"}}>
-                {this.position.x}
-                {this.position.y}
+                {xWithoutOffset}
+                {yWithoutOffset}
             </div>
         )
     }
