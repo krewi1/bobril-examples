@@ -19,26 +19,6 @@ export const Counter = b.createComponent<IContext>({
         };
         ctx.count = 0;
     },
-    postRender() {
-        console.log("post render");
-    },
-    postInitDom(ctx: IContext) {
-        console.log("post init dom");
-        ctx.increment();
-    },
-    postUpdateDom() {
-        console.log("post update dom");
-    },
-    postUpdateDomEverytime() {
-        console.log("post update dom everytime");
-    },
-    shouldChange() {
-        console.log("should change");
-        return true;
-    },
-    destroy(ctx: IContext): void {
-        clearInterval(ctx.timeoutId);
-    },
     render(ctx: IContext, me: b.IBobrilNode): void {
         me.children = [
             { tag: "h1", children: "counter" },

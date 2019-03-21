@@ -1,5 +1,11 @@
 import * as b from "bobril";
 import { Components } from "./components/index";
+import { ShareLogic } from "./shareLogic/index";
+
+export enum Routes {
+    COMPONENTS = "components",
+    SHARE_LOGIC = "share-logic"
+}
 
 const mainPage = b.createComponent({
     render(_ctx: b.IBobrilCtx, me: b.IBobrilNode): void {
@@ -10,10 +16,16 @@ const mainPage = b.createComponent({
                 children: [
                     {
                         tag: "li",
-                        children: b.link(
-                            b.styledDiv("components", { cursor: "pointer", textDecoration: "underline" }),
-                            "components"
-                        ),
+                        children: [
+                            b.link(
+                                b.styledDiv("components", { cursor: "pointer", textDecoration: "underline" }),
+                                Routes.COMPONENTS
+                            ),
+                            b.link(
+                                b.styledDiv("share-logic", { cursor: "pointer", textDecoration: "underline" }),
+                                Routes.SHARE_LOGIC
+                            )
+                        ],
                     },
                 ],
             },
@@ -22,4 +34,11 @@ const mainPage = b.createComponent({
     },
 });
 
-b.routes(b.route({ handler: mainPage }, [b.route({ url: "/components", name: "components", handler: Components })]));
+b.routes(b.route({ handler: mainPage }, [
+    b.route({ url: makePath(Routes.COMPONENTS), name: Routes.COMPONENTS, handler: Components }),
+    b.route({ url: makePath(Routes.SHARE_LOGIC), name: Routes.SHARE_LOGIC, handler: ShareLogic }),
+]));
+
+function makePath(route: Routes) {
+    return `/${route}`
+}
