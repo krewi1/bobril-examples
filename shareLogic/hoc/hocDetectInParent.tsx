@@ -3,8 +3,11 @@ import {OffsetInfo, Position} from "../naiveCursorDetect";
 import { ComponentOnPosition } from "../componentOnPosition";
 import {normalizeCoords} from "../common/normalizeCoords";
 
-export function hocDetectCursor<T extends Position>(TempComponent: b.IComponentFactory<T>): b.IComponentFactory<{}> {
-    return b.component(class HocDetectInParent extends b.Component<{}> {
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+type WithoutPosition<T extends Position> = Omit<T, "x"|"y">
+
+export function hocDetectCursor<T extends Position>(Component: b.IComponentFactory<T>): b.IComponentFactory<WithoutPosition<T>> {
+    return b.component(class HocDetectInParent extends b.Component<WithoutPosition<T>> {
         position: Position;
         offset: OffsetInfo;
 
@@ -51,11 +54,10 @@ export function hocDetectCursor<T extends Position>(TempComponent: b.IComponentF
         }
 
         render(data) {
-            const Component = TempComponent as any;
             const {x, y} = this.position;
             return (
                 <div style={{width: "100%", height: "100%"}}>
-                    <Component x={x} y={y}>
+                    <Component x={x} y={y} {...data}>
                         {data.children}
                     </Component>
                 </div>

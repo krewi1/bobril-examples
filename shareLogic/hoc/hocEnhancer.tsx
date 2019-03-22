@@ -4,7 +4,7 @@ interface ComponentData<T> {
     data: Promise<T>
 }
 
-export function hocEnhancer<T>(TempComponent: b.IComponentFactory<T>): b.IComponentFactory<ComponentData<T>> {
+export function hocEnhancer<T>(Component: b.IComponentFactory<T>): b.IComponentFactory<ComponentData<T>> {
     return b.component(class HocDetectInParent extends b.Component<ComponentData<T>> {
         loading: boolean;
         loadedData: T | null;
@@ -25,7 +25,6 @@ export function hocEnhancer<T>(TempComponent: b.IComponentFactory<T>): b.ICompon
             b.invalidate(this);
         }
         render() {
-            const Component = TempComponent as any;
             if (this.loading) {
                 return <div>Loading...</div>
             }
