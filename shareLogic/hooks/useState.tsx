@@ -1,18 +1,23 @@
 import * as b from "bobril";
+import { normalizeCoords } from "../common/normalizeCoords";
 
-function useElementOffset(ref?: HTMLElement) {
+export function useElementOffset(ref?: HTMLElement) {
     const [offsetTop, setOffsetTop] = b.useState(0);
     const [offsetLeft, setOffsetLeft] = b.useState(0);
+    const [maxX, setMaxX] = b.useState(0);
+    const [maxY, setMaxY] = b.useState(0);
 
     b.useLayoutEffect(() => {
         if (ref) {
             const bounding = ref.getBoundingClientRect();
             setOffsetTop(bounding.top);
             setOffsetLeft(bounding.left);
+            setMaxX(bounding.width);
+            setMaxY(bounding.height);
         }
     }, [ref]);
 
-    return [offsetTop, offsetLeft];
+    return [offsetTop, offsetLeft, maxY, maxX];
 
 }
 
@@ -23,13 +28,13 @@ export const UseState = b.component(class UseStateClazz extends b.Component<{}> 
     }
 
     render() {
-        const [offsetTop, offsetLeft] = useElementOffset(this.element);
+        const [offsetTop, offsetLeft, maxY, maxX] = useElementOffset(this.element);
         const [xPosition, setXPosition] = b.useState(0);
         const [yPosition, setYPosition] = b.useState(0);
         return (
             <div style={{width: "300px", height: "300px", position: "relative"}} onMouseMove={(event: any) => {
-                setXPosition(event.x - offsetLeft);
-                setYPosition(event.y - offsetTop);
+                setXPosition(normalizeCoords(maxX, event.x - offsetLeft));
+                setYPosition(normalizeCoords(maxY, event.y - offsetTop));
             }}>
                 <div style={{position: "absolute", top: yPosition, left: xPosition}}>Rendered item</div>
             </div>

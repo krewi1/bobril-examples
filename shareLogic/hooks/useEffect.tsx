@@ -5,14 +5,14 @@ export const UseEffect = b.component(() => {
     b.useEffect(() => {
         console.log("binding will happen");
         const handler = (event: KeyboardEvent) => setPressedKey(event.key);
-        window.addEventListener("keypress", handler);
+        window.addEventListener("keypress", handler, true);
         return () => window.removeEventListener("keypress", handler);
     });
 
     return (
         <div>
             <div>Focus browser and start typing</div>
-            {pressedKey}
+            <pre>{pressedKey} </pre>
         </div>
     )
 });

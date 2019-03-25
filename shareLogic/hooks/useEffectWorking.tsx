@@ -1,6 +1,6 @@
 import * as b from "bobril"
 
-export const UseEffectNotWorking = b.component(() => {
+export const UseEffectWorking = b.component(() => {
     const [pressedKey, setPressedKey] = b.useState("");
     const [codeMode, setCodeMode] = b.useState(false);
     b.useEffect(() => {
