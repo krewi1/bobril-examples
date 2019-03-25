@@ -8,12 +8,20 @@ import {DynamicCursorDetect} from "./MultipleCursorDetect";
 
 export const ShareLogic = () => {
     return [
-        b.styledDiv([
+        <div style={{display: "flex", justifyContent: "space-between"}}>
             <NaiveCursorDetectComponent/>,
-            <NaiveCursorDetectWCHComponent/>,
-            b.styledDiv(<TestComponent>Ahoj</TestComponent>, WrapperStyles)
-        ], {display: "flex", justifyContent: "space-between"}),
-        <DynamicCursorDetect/>,
+            <div>
+                <h2>Naive implementation vol 2</h2>
+                <NaiveCursorDetectWCHComponent/>
+            </div>,
+            <DynamicCursorDetect/>,
+        </div>,
+        <div>
+            <h2>HOC Injector</h2>
+            <div style={WrapperStyles}>
+                <TestComponent>Ahoj</TestComponent>
+            </div>,
+        </div>,
         <UseEnhancer/>
         ]
 };

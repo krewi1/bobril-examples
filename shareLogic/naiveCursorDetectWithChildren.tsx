@@ -58,14 +58,16 @@ class NaiveCursorDetectWithChildren extends b.Component<{}> {
     render(data: {}): b.IBobrilChildren {
         const {x, y} = this.position;
         return (
-            <div style={WrapperStyles}>
-                <ComponentOnPosition x={x} y={y} >
-                    Victim
-                </ComponentOnPosition>
-                <ComponentOnPosition x={x - 10} y={y - 10} >
-                    Stalker
-                </ComponentOnPosition>
-            </div>
+            <>
+                <div style={WrapperStyles}>
+                    <ComponentOnPosition x={x} y={y} >
+                        Victim
+                    </ComponentOnPosition>
+                    <ComponentOnPosition x={x - 10} y={y - 10} >
+                        Stalker
+                    </ComponentOnPosition>
+                </div>
+            </>
         )
     }
 }

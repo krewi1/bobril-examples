@@ -29,7 +29,10 @@ export function hocEnhancer<T>(Component: b.IComponentFactory<T>): b.IComponentF
                 return <div>Loading...</div>
             }
             return (
-                <Component {...this.loadedData}/>
+                <div>
+                    <h2>HOC Enhancer</h2>
+                    <Component {...this.loadedData}/>
+                </div>
             )
         }
     })

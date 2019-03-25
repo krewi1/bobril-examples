@@ -4,16 +4,19 @@ import { DynamicCursorDetectComponent } from "./renderProps/renderPropsCursorDet
 import { ComponentOnPosition } from "./componentOnPosition";
 
 export const DynamicCursorDetect = b.component(()  => {
-    return [
-        <DynamicCursorDetectComponent render={position => (
-            <>
-                <ComponentOnPosition x={position.x} y={position.y}>
-                    Tom
-                </ComponentOnPosition>
-                <ComponentOnPosition x={position.x - 10} y={position.y - 10}>
-                    Jerry
-                </ComponentOnPosition>
-            </>
-        )}/>
-    ]
+    return (
+        <div>
+            <h2>Render props</h2>
+            <DynamicCursorDetectComponent render={position => (
+                <>
+                    <ComponentOnPosition x={position.x} y={position.y}>
+                        Tom
+                    </ComponentOnPosition>
+                    <ComponentOnPosition x={position.x - 10} y={position.y - 10}>
+                        Jerry
+                    </ComponentOnPosition>
+                </>
+            )}/>
+        </div>
+    )
 });

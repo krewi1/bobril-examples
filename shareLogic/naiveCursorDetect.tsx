@@ -63,9 +63,12 @@ class NaiveCursorDetect extends b.Component<{}> {
     render(data: {}): b.IBobrilChildren {
         const {x, y} = this.position;
         return (
-            <div style={WrapperStyles}>
-                <div>x: {x}</div>
-                <div>y: {y}</div>
+            <div>
+                <h2>Naive cursor detection</h2>
+                <div style={WrapperStyles}>
+                    <div>x: {x}</div>
+                    <div>y: {y}</div>
+                </div>
             </div>
         )
     }
