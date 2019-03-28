@@ -12,7 +12,7 @@ export interface OffsetInfo extends Position {
     maxY: number;
 }
 
-class NaiveCursorDetect extends b.Component<{}> {
+export class NaiveCursorDetectComponent extends b.Component<{}> {
     position: Position;
     offset: OffsetInfo;
 
@@ -74,4 +74,3 @@ class NaiveCursorDetect extends b.Component<{}> {
     }
 }
 
-export const NaiveCursorDetectComponent = b.component(NaiveCursorDetect);

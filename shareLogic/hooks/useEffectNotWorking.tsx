@@ -1,6 +1,6 @@
 import * as b from "bobril"
 
-export const UseEffectNotWorking = b.component(() => {
+export const UseEffectNotWorking: b.IComponentFactory<{}> = () => {
     const [pressedKey, setPressedKey] = b.useState("");
     const [codeMode, setCodeMode] = b.useState(false);
     b.useEffect(() => {
@@ -20,4 +20,4 @@ export const UseEffectNotWorking = b.component(() => {
             {pressedKey}
         </div>
     )
-});
+};

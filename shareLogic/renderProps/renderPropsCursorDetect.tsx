@@ -12,7 +12,7 @@ export interface IData {
     render: (position: Position) => b.IBobrilChildren;
 }
 
-class DynamicCursorDetect extends b.Component<IData> {
+export class DynamicCursorDetectComponent extends b.Component<IData> {
     position: Position;
     offset: OffsetInfo;
 
@@ -69,4 +69,3 @@ class DynamicCursorDetect extends b.Component<IData> {
     }
 }
 
-export const DynamicCursorDetectComponent = b.component(DynamicCursorDetect);

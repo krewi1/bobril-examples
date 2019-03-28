@@ -27,10 +27,11 @@ function useCursorCoordinates(ref?: HTMLElement) {
     return [positionX, positionY];
 }
 
-export const CustomHook = b.component(class CustomHookClazz extends b.Component<{}> {
+export class CustomHook extends b.Component<{}> {
     element?: HTMLElement;
     postInitDom(me: b.IBobrilCacheNode): void {
         this.element = b.getDomNode(me) as HTMLElement;
+        b.invalidate(this);
     }
 
     render(data: {}): b.IBobrilChildren {
@@ -44,4 +45,4 @@ export const CustomHook = b.component(class CustomHookClazz extends b.Component<
             </div>
         )
     }
-});
+}

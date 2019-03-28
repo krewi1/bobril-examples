@@ -4,8 +4,8 @@ interface ComponentData<T> {
     data: Promise<T>
 }
 
-export function hocEnhancer<T>(Component: b.IComponentFactory<T>): b.IComponentFactory<ComponentData<T>> {
-    return b.component(class HocDetectInParent extends b.Component<ComponentData<T>> {
+export function hocEnhancer<T>(Component: b.IComponentFactory<T>) {
+    return class HocDetectInParent extends b.Component<ComponentData<T>> {
         loading: boolean;
         loadedData: T | null;
 
@@ -35,20 +35,20 @@ export function hocEnhancer<T>(Component: b.IComponentFactory<T>): b.IComponentF
                 </div>
             )
         }
-    })
+    }
 }
 
 interface DataForComponent {
     text: string;
 }
 
-export const UseEnhancer = b.component(class WithEnhancer extends b.Component<{}> {
+export class UseEnhancer extends b.Component<{}> {
     render(data) {
         const PromiseResolveAfterTime = new Promise<DataForComponent>((resolve) => {
             setTimeout(() => resolve({text: "This will be rendered after timeout"}), 5000);
         });
         return <TestComponentEnhancer data={PromiseResolveAfterTime}/>
     }
-});
+}
 
-export const TestComponentEnhancer = hocEnhancer(b.component((data: DataForComponent) => <div>{data.text}</div>));
+export const TestComponentEnhancer = hocEnhancer((data: DataForComponent) => <div>{data.text}</div>);

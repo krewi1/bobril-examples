@@ -6,8 +6,8 @@ import {normalizeCoords} from "../common/normalizeCoords";
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 type WithoutPosition<T extends Position> = Omit<T, "x"|"y">
 
-export function hocDetectCursor<T extends Position>(Component: b.IComponentFactory<T>): b.IComponentFactory<WithoutPosition<T>> {
-    return b.component(class HocDetectInParent extends b.Component<WithoutPosition<T>> {
+export function hocDetectCursor<T extends Position>(Component: b.IComponentFactory<T>) {
+    return class HocDetectInParent extends b.Component<WithoutPosition<T>> {
         position: Position;
         offset: OffsetInfo;
 
@@ -43,7 +43,7 @@ export function hocDetectCursor<T extends Position>(Component: b.IComponentFacto
             return b.EventResult.HandledPreventDefault;
         }
 
-        private recalculatePosition(x: number, y: number) {
+        recalculatePosition(x: number, y: number) {
             const {maxY, maxX, x: offsetX, y: offsetY} = this.offset;
 
             this.position = {
@@ -63,7 +63,7 @@ export function hocDetectCursor<T extends Position>(Component: b.IComponentFacto
                 </div>
             )
         }
-    })
+    }
 }
 
 export const TestComponent = hocDetectCursor(ComponentOnPosition);

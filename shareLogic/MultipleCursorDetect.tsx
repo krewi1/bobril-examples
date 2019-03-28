@@ -3,7 +3,7 @@ import * as b from "bobril"
 import { DynamicCursorDetectComponent } from "./renderProps/renderPropsCursorDetect";
 import { ComponentOnPosition } from "./componentOnPosition";
 
-export const DynamicCursorDetect = b.component(()  => {
+export const DynamicCursorDetect = ()  => {
     return (
         <div>
             <h2>Render props</h2>
@@ -19,4 +19,4 @@ export const DynamicCursorDetect = b.component(()  => {
             )}/>
         </div>
     )
-});
+};

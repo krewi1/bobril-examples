@@ -1,6 +1,6 @@
 import * as b from "bobril";
 
-export const UseEffectWithDeps = b.component(() => {
+export const UseEffectWithDeps = () => {
     const [pressedKey, setPressedKey] = b.useState("");
     b.useEffect(() => {
         console.log("binding will happen");
@@ -15,4 +15,4 @@ export const UseEffectWithDeps = b.component(() => {
             {pressedKey}
         </div>
     );
-});
+};

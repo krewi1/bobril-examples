@@ -9,7 +9,7 @@ export interface Position {
     y: number;
 }
 
-class NaiveCursorDetectWithChildren extends b.Component<{}> {
+export class NaiveCursorDetectWCHComponent extends b.Component<{}> {
     position: Position;
     offset: OffsetInfo;
 
@@ -71,5 +71,3 @@ class NaiveCursorDetectWithChildren extends b.Component<{}> {
         )
     }
 }
-
-export const NaiveCursorDetectWCHComponent = b.component(NaiveCursorDetectWithChildren);

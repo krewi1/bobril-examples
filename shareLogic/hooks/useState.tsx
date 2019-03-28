@@ -21,7 +21,7 @@ export function useElementOffset(ref?: HTMLElement) {
 
 }
 
-export const UseState = b.component(class UseStateClazz extends b.Component<{}> {
+export class UseState extends b.Component<{}> {
     element?: HTMLElement;
     postInitDom(me: b.IBobrilCacheNode): void {
         this.element = b.getDomNode(me) as HTMLElement
@@ -40,4 +40,4 @@ export const UseState = b.component(class UseStateClazz extends b.Component<{}> 
             </div>
         )
     }
-});
+}
