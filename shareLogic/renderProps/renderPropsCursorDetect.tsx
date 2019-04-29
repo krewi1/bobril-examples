@@ -1,7 +1,7 @@
 import * as b from "bobril";
-import {WrapperStyles} from "../hoc/styles";
-import {normalizeCoords} from "../common/normalizeCoords";
-import {OffsetInfo} from "../naiveCursorDetect";
+import { WrapperStyles } from "../hoc/styles";
+import { normalizeCoords } from "../common/normalizeCoords";
+import { OffsetInfo } from "../naiveCursorDetect";
 
 export interface Position {
     x: number;
@@ -20,13 +20,13 @@ export class DynamicCursorDetectComponent extends b.Component<IData> {
         super();
         this.position = {
             x: 0,
-            y: 0
+            y: 0,
         };
         this.offset = {
             x: 0,
             y: 0,
             maxX: 0,
-            maxY: 0
+            maxY: 0,
         };
     }
 
@@ -44,28 +44,23 @@ export class DynamicCursorDetectComponent extends b.Component<IData> {
     }
 
     onMouseMove(event: b.IBobrilMouseEvent): b.GenericEventResult {
-        const {x, y} = event;
+        const { x, y } = event;
 
         this.recalculatePosition(x, y);
         return b.EventResult.HandledPreventDefault;
     }
 
     private recalculatePosition(x: number, y: number) {
-        const {maxY, maxX, x: offsetX, y: offsetY} = this.offset;
+        const { maxY, maxX, x: offsetX, y: offsetY } = this.offset;
 
         this.position = {
             x: normalizeCoords(maxX, x - offsetX),
-            y : normalizeCoords(maxY, y - offsetY)
+            y: normalizeCoords(maxY, y - offsetY),
         };
         b.invalidate(this);
     }
 
     render(data): b.IBobrilChildren {
-        return (
-            <div style={WrapperStyles}>
-                {data.render(this.position)}
-            </div>
-        )
+        return <div style={WrapperStyles}>{data.render(this.position)}</div>;
     }
 }
-

@@ -1,6 +1,6 @@
 import * as b from "bobril";
-import {WrapperStyles} from "./hoc/styles";
-import {normalizeCoords} from "./common/normalizeCoords";
+import { WrapperStyles } from "./hoc/styles";
+import { normalizeCoords } from "./common/normalizeCoords";
 
 export interface Position {
     x: number;
@@ -20,13 +20,13 @@ export class NaiveCursorDetectComponent extends b.Component<{}> {
         super();
         this.position = {
             x: 0,
-            y: 0
+            y: 0,
         };
         this.offset = {
             x: 0,
             y: 0,
             maxX: 0,
-            maxY: 0
+            maxY: 0,
         };
     }
 
@@ -44,24 +44,24 @@ export class NaiveCursorDetectComponent extends b.Component<{}> {
     }
 
     onMouseMove(event: b.IBobrilMouseEvent): b.GenericEventResult {
-        const {x, y} = event;
+        const { x, y } = event;
 
         this.recalculatePosition(x, y);
         return b.EventResult.HandledPreventDefault;
     }
 
     private recalculatePosition(x: number, y: number) {
-        const {maxY, maxX, x: offsetX, y: offsetY} = this.offset;
+        const { maxY, maxX, x: offsetX, y: offsetY } = this.offset;
 
         this.position = {
             x: normalizeCoords(maxX, x - offsetX),
-            y : normalizeCoords(maxY, y - offsetY)
+            y: normalizeCoords(maxY, y - offsetY),
         };
         b.invalidate(this);
     }
 
     render(data: {}): b.IBobrilChildren {
-        const {x, y} = this.position;
+        const { x, y } = this.position;
         return (
             <div>
                 <h2>Naive cursor detection</h2>
@@ -70,7 +70,6 @@ export class NaiveCursorDetectComponent extends b.Component<{}> {
                     <div>y: {y}</div>
                 </div>
             </div>
-        )
+        );
     }
 }
-

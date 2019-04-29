@@ -1,4 +1,4 @@
-import * as b from "bobril"
+import * as b from "bobril";
 
 export const UseEffectNotWorking: b.IComponentFactory<{}> = () => {
     const [pressedKey, setPressedKey] = b.useState("");
@@ -15,9 +15,5 @@ export const UseEffectNotWorking: b.IComponentFactory<{}> = () => {
         return () => window.removeEventListener("keypress", handler);
     }, []);
 
-    return (
-        <div>
-            {pressedKey}
-        </div>
-    )
+    return <div>{pressedKey}</div>;
 };

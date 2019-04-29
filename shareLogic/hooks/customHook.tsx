@@ -9,20 +9,17 @@ function useCursorCoordinates(ref?: HTMLElement) {
     const [positionY, setPositionY] = b.useState(0);
     const [offsetY, offsetX, maxX, maxY] = useElementOffset(ref);
 
-    b.useEffect(
-        () => {
-            const handler = (event: MouseEvent) => {
-                setPositionX(normalizeCoords(maxX, event.clientX - offsetX));
-                setPositionY(normalizeCoords(maxY, event.clientY - offsetY));
-            };
-            if (ref) {
-                ref.addEventListener("mousemove", handler, true);
-                return () => ref.removeEventListener("mousemove", handler);
-            }
-            return null;
-        },
-        [ref, offsetX, offsetY, maxX, maxY]
-    );
+    b.useEffect(() => {
+        const handler = (event: MouseEvent) => {
+            setPositionX(normalizeCoords(maxX, event.clientX - offsetX));
+            setPositionY(normalizeCoords(maxY, event.clientY - offsetY));
+        };
+        if (ref) {
+            ref.addEventListener("mousemove", handler, true);
+            return () => ref.removeEventListener("mousemove", handler);
+        }
+        return null;
+    }, [ref, offsetX, offsetY, maxX, maxY]);
 
     return [positionX, positionY];
 }
@@ -43,6 +40,6 @@ export class CustomHook extends b.Component<{}> {
                     Wow i am using hook
                 </ComponentOnPosition>
             </div>
-        )
+        );
     }
 }

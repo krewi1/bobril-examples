@@ -1,4 +1,4 @@
-import * as b from "bobril"
+import * as b from "bobril";
 
 export const UseEffectWorking = () => {
     const [pressedKey, setPressedKey] = b.useState("");
@@ -15,9 +15,5 @@ export const UseEffectWorking = () => {
         return () => window.removeEventListener("keypress", handler);
     }, [codeMode]);
 
-    return (
-        <div>
-            {pressedKey}
-        </div>
-    )
+    return <div>{pressedKey}</div>;
 };

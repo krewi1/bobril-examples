@@ -1,8 +1,8 @@
 import * as b from "bobril";
 import { ComponentOnPosition } from "./componentOnPosition";
-import {WrapperStyles} from "./hoc/styles";
-import {normalizeCoords} from "./common/normalizeCoords";
-import {OffsetInfo} from "./naiveCursorDetect";
+import { WrapperStyles } from "./hoc/styles";
+import { normalizeCoords } from "./common/normalizeCoords";
+import { OffsetInfo } from "./naiveCursorDetect";
 
 export interface Position {
     x: number;
@@ -17,13 +17,13 @@ export class NaiveCursorDetectWCHComponent extends b.Component<{}> {
         super();
         this.position = {
             x: 0,
-            y: 0
+            y: 0,
         };
         this.offset = {
             x: 0,
             y: 0,
             maxX: 0,
-            maxY: 0
+            maxY: 0,
         };
     }
 
@@ -40,34 +40,34 @@ export class NaiveCursorDetectWCHComponent extends b.Component<{}> {
     }
 
     onMouseMove(event: b.IBobrilMouseEvent): b.GenericEventResult {
-        const {x, y} = event;
+        const { x, y } = event;
         this.recalculatePosition(x, y);
         return b.EventResult.HandledPreventDefault;
     }
 
     private recalculatePosition(x: number, y: number) {
-        const {maxY, maxX, x: offsetX, y: offsetY} = this.offset;
+        const { maxY, maxX, x: offsetX, y: offsetY } = this.offset;
 
         this.position = {
             x: normalizeCoords(maxX, x - offsetX),
-            y : normalizeCoords(maxY, y - offsetY)
+            y: normalizeCoords(maxY, y - offsetY),
         };
         b.invalidate(this);
     }
 
     render(data: {}): b.IBobrilChildren {
-        const {x, y} = this.position;
+        const { x, y } = this.position;
         return (
             <>
                 <div style={WrapperStyles}>
-                    <ComponentOnPosition x={x} y={y} >
+                    <ComponentOnPosition x={x} y={y}>
                         Victim
                     </ComponentOnPosition>
-                    <ComponentOnPosition x={x - 10} y={y - 10} >
+                    <ComponentOnPosition x={x - 10} y={y - 10}>
                         Stalker
                     </ComponentOnPosition>
                 </div>
             </>
-        )
+        );
     }
 }

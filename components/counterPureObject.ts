@@ -25,7 +25,7 @@ export const BobrilComponentNaive: b.IBobrilNode = {
     },
 };
 
-interface IBobrilDynamic {
+export interface IBobrilDynamic {
     name: string;
 }
 

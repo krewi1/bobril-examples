@@ -1,10 +1,10 @@
 import * as b from "bobril";
 
 interface ComponentData<T> {
-    data: Promise<T>
+    data: Promise<T>;
 }
 
-export function hocEnhancer<T>(Component: b.IComponentFactory<T>) {
+export function hocEnhancer<T extends object>(Component: b.IComponentFactory<T>) {
     return class HocDetectInParent extends b.Component<ComponentData<T>> {
         loading: boolean;
         loadedData: T | null;
@@ -16,7 +16,7 @@ export function hocEnhancer<T>(Component: b.IComponentFactory<T>) {
         }
 
         init() {
-            this.data.data.then((data) => this.dataLoaded(data))
+            this.data.data.then(data => this.dataLoaded(data));
         }
 
         dataLoaded(incomeData: T) {
@@ -26,16 +26,16 @@ export function hocEnhancer<T>(Component: b.IComponentFactory<T>) {
         }
         render() {
             if (this.loading) {
-                return <div>Loading...</div>
+                return <div>Loading...</div>;
             }
             return (
                 <div>
                     <h2>HOC Enhancer</h2>
-                    <Component {...this.loadedData}/>
+                    <Component {...this.loadedData} />
                 </div>
-            )
+            );
         }
-    }
+    };
 }
 
 interface DataForComponent {
@@ -44,10 +44,10 @@ interface DataForComponent {
 
 export class UseEnhancer extends b.Component<{}> {
     render(data) {
-        const PromiseResolveAfterTime = new Promise<DataForComponent>((resolve) => {
-            setTimeout(() => resolve({text: "This will be rendered after timeout"}), 5000);
+        const PromiseResolveAfterTime = new Promise<DataForComponent>(resolve => {
+            setTimeout(() => resolve({ text: "This will be rendered after timeout" }), 5000);
         });
-        return <TestComponentEnhancer data={PromiseResolveAfterTime}/>
+        return <TestComponentEnhancer data={PromiseResolveAfterTime} />;
     }
 }
 

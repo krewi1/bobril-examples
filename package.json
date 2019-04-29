@@ -2,15 +2,16 @@
   "name": "bobriltest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bb"
+    "start": "bb",
+    "format": "prettier --write ./**/*.{ts,tsx} ./**/**/*.{ts,tsx}"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bobril": "^9.6.0",
+    "bobril": "^10.1.2",
     "rxjs": "^6.4.0",
     "tslint": "^5.14.0",
     "typescript": "^3.3.3333"

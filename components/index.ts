@@ -3,7 +3,7 @@ import {
     BobrilComponentDynamic,
     BobrilComponentDynamicGeneric,
     BobrilComponentNaive,
-    BobrilStaticData,
+    BobrilStaticData, IBobrilDynamic,
     PureObject,
     PureObjectWithoutTag,
     PureVirtualObjectWithChild,
@@ -18,7 +18,7 @@ export const Components = () => {
         BobrilComponentNaive,
         BobrilStaticData,
         BobrilComponentDynamic({ name: "krewi" }),
-        BobrilComponentDynamicGeneric({
+        BobrilComponentDynamicGeneric<IBobrilDynamic>({
             tag: "div",
             component: {
                 render: function(ctx, me) {

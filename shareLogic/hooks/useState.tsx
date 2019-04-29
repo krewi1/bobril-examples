@@ -18,13 +18,12 @@ export function useElementOffset(ref?: HTMLElement) {
     }, [ref]);
 
     return [offsetTop, offsetLeft, maxY, maxX];
-
 }
 
 export class UseState extends b.Component<{}> {
     element?: HTMLElement;
     postInitDom(me: b.IBobrilCacheNode): void {
-        this.element = b.getDomNode(me) as HTMLElement
+        this.element = b.getDomNode(me) as HTMLElement;
     }
 
     render() {
@@ -32,12 +31,15 @@ export class UseState extends b.Component<{}> {
         const [xPosition, setXPosition] = b.useState(0);
         const [yPosition, setYPosition] = b.useState(0);
         return (
-            <div style={{width: "300px", height: "300px", position: "relative"}} onMouseMove={(event: any) => {
-                setXPosition(normalizeCoords(maxX, event.x - offsetLeft));
-                setYPosition(normalizeCoords(maxY, event.y - offsetTop));
-            }}>
-                <div style={{position: "absolute", top: yPosition, left: xPosition}}>Rendered item</div>
+            <div
+                style={{ width: "300px", height: "300px", position: "relative" }}
+                onMouseMove={(event: any) => {
+                    setXPosition(normalizeCoords(maxX, event.x - offsetLeft));
+                    setYPosition(normalizeCoords(maxY, event.y - offsetTop));
+                }}
+            >
+                <div style={{ position: "absolute", top: yPosition, left: xPosition }}>Rendered item</div>
             </div>
-        )
+        );
     }
 }

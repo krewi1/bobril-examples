@@ -8,12 +8,12 @@ import { UseEffectWorking } from "./hooks/useEffectWorking";
 
 export const ShareLogicHooks = () => {
     return [
-       <UseState/>,
-       <UseEffect/>,
+        <UseState />,
+        <UseEffect />,
         // UNCOMMENT FOR TEST IT
-        <UseEffectWithDeps/>,
-        <UseEffectNotWorking/>,
-        <UseEffectWorking/>,
-        <CustomHook/>
-    ]
+        <UseEffectWithDeps />,
+        <UseEffectNotWorking />,
+        <UseEffectWorking />,
+        <CustomHook />,
+    ];
 };

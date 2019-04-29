@@ -14,5 +14,5 @@ export const UseEffect = () => {
             <div>Focus browser and start typing</div>
             <pre>{pressedKey} </pre>
         </div>
-    )
+    );
 };
