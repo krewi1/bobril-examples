@@ -1,0 +1,1 @@
+bobrilRegisterTranslations("",[],["Translate me\t0"])

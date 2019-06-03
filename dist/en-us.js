@@ -1,0 +1,1 @@
+bobrilRegisterTranslations('en-us',[function (e,t){var r=String(e).split("."),n=!r[1],o=Number(r[0])==e,c=o&&r[0].slice(-1),i=o&&r[0].slice(-2);return t?1==c&&11!=i?"one":2==c&&12!=i?"two":3==c&&13!=i?"few":"other":1==e&&n?"one":"other"},",","."],["Translate me"])

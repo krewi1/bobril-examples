@@ -20,6 +20,8 @@ function Section() {
 }
 
 function Paragraph() {
+    debugger;
+
     return (
         <div>
             <Sentence>I am styled with context</Sentence>
@@ -34,3 +36,4 @@ interface ISentenceData {
 function Sentence(this: b.IBobrilCtx, data: ISentenceData) {
     return <StyleConsumer>{style => <div style={style}>{data.children}</div>}</StyleConsumer>;
 }
+Sentence["test"] = "blbost";
