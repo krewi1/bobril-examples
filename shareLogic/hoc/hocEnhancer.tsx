@@ -4,7 +4,7 @@ interface ComponentData<T> {
     data: Promise<T>
 }
 
-export function hocEnhancer<T>(Component: b.IComponentFactory<T>) {
+export function hocEnhancer<T extends {}>(Component: b.IComponentFactory<T>) {
     return class HocDetectInParent extends b.Component<ComponentData<T>> {
         loading: boolean;
         loadedData: T | null;

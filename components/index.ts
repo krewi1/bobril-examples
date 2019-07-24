@@ -18,14 +18,6 @@ export const Components = () => {
         BobrilComponentNaive,
         BobrilStaticData,
         BobrilComponentDynamic({ name: "krewi" }),
-        BobrilComponentDynamicGeneric({
-            tag: "div",
-            component: {
-                render: function(ctx, me) {
-                    me.children = `Hello ${ctx.data.name}`;
-                },
-            },
-        })({ name: "krewi" }),
         Counter(),
         CounterClass(),
     ];

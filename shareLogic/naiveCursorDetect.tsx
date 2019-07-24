@@ -3,6 +3,7 @@ import {WrapperStyles} from "./hoc/styles";
 import {normalizeCoords} from "./common/normalizeCoords";
 
 export interface Position {
+    children?: b.IBobrilChildren;
     x: number;
     y: number;
 }

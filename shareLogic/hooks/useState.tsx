@@ -35,6 +35,7 @@ export class UseState extends b.Component<{}> {
             <div style={{width: "300px", height: "300px", position: "relative"}} onMouseMove={(event: any) => {
                 setXPosition(normalizeCoords(maxX, event.x - offsetLeft));
                 setYPosition(normalizeCoords(maxY, event.y - offsetTop));
+                return true;
             }}>
                 <div style={{position: "absolute", top: yPosition, left: xPosition}}>Rendered item</div>
             </div>

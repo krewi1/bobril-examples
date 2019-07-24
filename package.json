@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bobril": "^9.6.0",
+    "bobril": "*",
     "rxjs": "^6.4.0",
     "tslint": "^5.14.0",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.5.2"
   },
   "devDependencies": {
     "prettier": "^1.16.4"
